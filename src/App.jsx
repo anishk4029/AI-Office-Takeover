@@ -275,7 +275,7 @@ const queensSolution = [
 
 function deriveQueensDigit() {
   const sumCols = queensSolution.reduce((acc, [, col]) => acc + col, 0);
-  return String(sumCols % 10); // 1 digit from queens puzzle
+  return String(sumCols % 10);
 }
 
 function pick(list) {
@@ -304,13 +304,13 @@ function randomCharFromEquation(equation) {
   const eq = String(equation || '');
   if (!eq.length) return '?';
   const index = Math.floor(Math.random() * eq.length);
-  return eq[index]; // 1-character code fragment
+  return eq[index];
 }
 
 function letterToIndex(letter) {
   const code = String(letter || '').toUpperCase().charCodeAt(0);
   if (code < 65 || code > 90) return 0;
-  return code - 64; // A=1, B=2, ..., Z=26
+  return code - 64;
 }
 
 function deriveWordleCode(word) {
@@ -318,7 +318,6 @@ function deriveWordleCode(word) {
     .toUpperCase()
     .split('')
     .reduce((acc, ch) => acc + letterToIndex(ch), 0);
-  // 3-digit string from Wordle (e.g., 7 -> "007")
   return String(sum).padStart(3, '0');
 }
 
@@ -330,16 +329,16 @@ function createGame() {
   const row = Number(sudoku.target.slice(1)) - 1;
   const col = COLS.indexOf(sudoku.target[0]);
 
-  const nerdleCodeChar = randomCharFromEquation(nerdle.equation); // 1 char from Nerdle
-  const wordleCode = deriveWordleCode(wordle.word); // 3 chars from Wordle
-  const queensDigit = deriveQueensDigit(); // 1 digit from Queens
+  const nerdleCodeChar = randomCharFromEquation(nerdle.equation);
+  const wordleCode = deriveWordleCode(wordle.word);
+  const queensDigit = deriveQueensDigit();
 
   return {
-    poker, // 1 digit
-    sudoku: { ...sudoku, digit: sudoku.solution[row][col] }, // 1 digit
-    nerdle: { ...nerdle, digit: nerdleCodeChar }, // 1 char
-    wordle: { ...wordle, digit: wordleCode }, // 3-digit string
-    queens: { digit: queensDigit } // 1 digit
+    poker,
+    sudoku: { ...sudoku, digit: sudoku.solution[row][col] },
+    nerdle: { ...nerdle, digit: nerdleCodeChar },
+    wordle: { ...wordle, digit: wordleCode },
+    queens: { digit: queensDigit }
   };
 }
 
@@ -500,7 +499,7 @@ function App() {
       }
     }
     if (queenPositions.length !== queensSolution.length) return false;
-    const key = (rc) => `${rc[0]}-${rc[1]}`;
+    const key = (rc) => `$${rc[0]}-$${rc[1]}`;
     const setSolution = new Set(queensSolution.map(key));
     return queenPositions.every((pos) => setSolution.has(key(pos)));
   })();
@@ -509,8 +508,6 @@ function App() {
   const solvedCount = completed.filter(Boolean).length;
   const progress = (solvedCount / 5) * 100;
 
-  // Final code structure:
-  // 1 from poker, 1 from sudoku, 1 from nerdle, 3 from wordle, 1 from queens -> total 7 chars
   const fullCode =
     game.poker.digit +
     game.sudoku.digit +
@@ -522,7 +519,6 @@ function App() {
     completed[0] ? game.poker.digit : '_',
     completed[1] ? game.sudoku.digit : '_',
     completed[2] ? game.nerdle.digit : '_',
-    // Wordle is 3-digit chunk; show either all 3 or ___
     completed[3] ? game.wordle.digit : '___',
     completed[4] ? game.queens.digit : '_'
   ].join(' ');
@@ -560,7 +556,7 @@ function App() {
 
   function sudokuStyle(cell, row, col) {
     const value = sudokuEntries[cell] || '';
-    const correct = game.sudoku.solution[row][col];
+       const correct = game.sudoku.solution[row][col];
     const isTarget = cell === game.sudoku.target;
     if (isTarget && value === '') return 'targetCell';
     if (isTarget && value === correct) return 'correctCell targetSolvedCell';
@@ -629,9 +625,9 @@ function App() {
   }
 
   function queensCellClass(row, col) {
-    const state = queensBoard[row][col]; // 'blank' | 'x' | 'queen'
+    const state = queensBoard[row][col];
     const region = queensRegions[row][col];
-    return `queensCell queensCell-${region} queensCell-${state}`;
+    return `queensCell queensCell-$${region} queensCell-$${state}`;
   }
 
   return (
@@ -808,7 +804,7 @@ function App() {
               {nerdleGuesses.map((guess, rowIndex) => {
                 const statuses = evaluateGuess(guess, game.nerdle.equation);
                 return (
-                  <div key={`${guess}-${rowIndex}`} className="tileRow">
+                  <div key={`$${guess}-$${rowIndex}`} className="tileRow">
                     {guess.split('').map((ch, index) => (
                       <div key={index} className={tileClass(statuses[index])}>
                         {ch}
@@ -870,7 +866,7 @@ function App() {
               {wordleGuesses.map((guess, rowIndex) => {
                 const statuses = evaluateGuess(guess, game.wordle.word);
                 return (
-                  <div key={`${guess}-${rowIndex}`} className="tileRow">
+                  <div key={`$${guess}-$${rowIndex}`} className="tileRow">
                     {guess.split('').map((ch, index) => (
                       <div key={index} className={tileClass(statuses[index], true)}>
                         {ch}
