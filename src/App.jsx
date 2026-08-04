@@ -7,72 +7,180 @@ const pokerScenarios = [
     winner: '4',
     digit: '4',
     hint: 'Remember the poker hand rankings. One player can make an extremely powerful hand using the community cards.',
-    community: [{ rank: 'A', suit: '♠' }, { rank: 'K', suit: '♠' }, { rank: 'Q', suit: '♠' }, { rank: '9', suit: '♦' }, { rank: '2', suit: '♣' }],
+    community: [
+      { rank: 'A', suit: '♠' },
+      { rank: 'K', suit: '♠' },
+      { rank: 'Q', suit: '♠' },
+      { rank: '9', suit: '♦' },
+      { rank: '2', suit: '♣' }
+    ],
     players: [
-      [{ rank: 'A', suit: '♥' }, { rank: '9', suit: '♣' }],
-      [{ rank: 'K', suit: '♦' }, { rank: 'K', suit: '♣' }],
-      [{ rank: '9', suit: '♠' }, { rank: '9', suit: '♥' }],
-      [{ rank: 'J', suit: '♠' }, { rank: '10', suit: '♠' }]
+      [
+        { rank: 'A', suit: '♥' },
+        { rank: '9', suit: '♣' }
+      ],
+      [
+        { rank: 'K', suit: '♦' },
+        { rank: 'K', suit: '♣' }
+      ],
+      [
+        { rank: '9', suit: '♠' },
+        { rank: '9', suit: '♥' }
+      ],
+      [
+        { rank: 'J', suit: '♠' },
+        { rank: '10', suit: '♠' }
+      ]
     ]
   },
   {
     winner: '2',
     digit: '7',
     hint: 'Check whether any player can use the community cards to form four of a kind.',
-    community: [{ rank: 'A', suit: '♠' }, { rank: 'A', suit: '♥' }, { rank: 'A', suit: '♦' }, { rank: 'K', suit: '♣' }, { rank: '3', suit: '♣' }],
+    community: [
+      { rank: 'A', suit: '♠' },
+      { rank: 'A', suit: '♥' },
+      { rank: 'A', suit: '♦' },
+      { rank: 'K', suit: '♣' },
+      { rank: '3', suit: '♣' }
+    ],
     players: [
-      [{ rank: 'K', suit: '♠' }, { rank: 'Q', suit: '♠' }],
-      [{ rank: 'A', suit: '♣' }, { rank: '2', suit: '♦' }],
-      [{ rank: 'K', suit: '♥' }, { rank: 'J', suit: '♣' }],
-      [{ rank: '3', suit: '♥' }, { rank: '3', suit: '♠' }]
+      [
+        { rank: 'K', suit: '♠' },
+        { rank: 'Q', suit: '♠' }
+      ],
+      [
+        { rank: 'A', suit: '♣' },
+        { rank: '2', suit: '♦' }
+      ],
+      [
+        { rank: 'K', suit: '♥' },
+        { rank: 'J', suit: '♣' }
+      ],
+      [
+        { rank: '3', suit: '♥' },
+        { rank: '3', suit: '♠' }
+      ]
     ]
   },
   {
     winner: '1',
     digit: '2',
     hint: 'Look for players who can connect five cards in sequence of the same suit.',
-    community: [{ rank: '6', suit: '♥' }, { rank: '7', suit: '♥' }, { rank: '8', suit: '♥' }, { rank: 'K', suit: '♣' }, { rank: 'K', suit: '♦' }],
+    community: [
+      { rank: '6', suit: '♥' },
+      { rank: '7', suit: '♥' },
+      { rank: '8', suit: '♥' },
+      { rank: 'K', suit: '♣' },
+      { rank: 'K', suit: '♦' }
+    ],
     players: [
-      [{ rank: '5', suit: '♥' }, { rank: '9', suit: '♥' }],
-      [{ rank: 'K', suit: '♥' }, { rank: '2', suit: '♣' }],
-      [{ rank: '8', suit: '♠' }, { rank: '8', suit: '♣' }],
-      [{ rank: 'A', suit: '♣' }, { rank: 'J', suit: '♣' }]
+      [
+        { rank: '5', suit: '♥' },
+        { rank: '9', suit: '♥' }
+      ],
+      [
+        { rank: 'K', suit: '♥' },
+        { rank: '2', suit: '♣' }
+      ],
+      [
+        { rank: '8', suit: '♠' },
+        { rank: '8', suit: '♣' }
+      ],
+      [
+        { rank: 'A', suit: '♣' },
+        { rank: 'J', suit: '♣' }
+      ]
     ]
   },
   {
     winner: '3',
     digit: '8',
     hint: 'If multiple players make a flush, compare the highest cards in each flush.',
-    community: [{ rank: '2', suit: '♣' }, { rank: '6', suit: '♣' }, { rank: '9', suit: '♣' }, { rank: 'Q', suit: '♦' }, { rank: '4', suit: '♥' }],
+    community: [
+      { rank: '2', suit: '♣' },
+      { rank: '6', suit: '♣' },
+      { rank: '9', suit: '♣' },
+      { rank: 'Q', suit: '♦' },
+      { rank: '4', suit: '♥' }
+    ],
     players: [
-      [{ rank: 'A', suit: '♦' }, { rank: 'A', suit: '♥' }],
-      [{ rank: 'Q', suit: '♣' }, { rank: '3', suit: '♣' }],
-      [{ rank: 'A', suit: '♣' }, { rank: 'K', suit: '♣' }],
-      [{ rank: '9', suit: '♦' }, { rank: '9', suit: '♥' }]
+      [
+        { rank: 'A', suit: '♦' },
+        { rank: 'A', suit: '♥' }
+      ],
+      [
+        { rank: 'Q', suit: '♣' },
+        { rank: '3', suit: '♣' }
+      ],
+      [
+        { rank: 'A', suit: '♣' },
+        { rank: 'K', suit: '♣' }
+      ],
+      [
+        { rank: '9', suit: '♦' },
+        { rank: '9', suit: '♥' }
+      ]
     ]
   },
   {
     winner: '2',
     digit: '6',
     hint: 'See whether any player can combine three matching cards and two matching cards into a full house.',
-    community: [{ rank: 'Q', suit: '♠' }, { rank: 'Q', suit: '♦' }, { rank: '10', suit: '♣' }, { rank: '4', suit: '♥' }, { rank: '2', suit: '♣' }],
+    community: [
+      { rank: 'Q', suit: '♠' },
+      { rank: 'Q', suit: '♦' },
+      { rank: '10', suit: '♣' },
+      { rank: '4', suit: '♥' },
+      { rank: '2', suit: '♣' }
+    ],
     players: [
-      [{ rank: 'A', suit: '♠' }, { rank: 'K', suit: '♠' }],
-      [{ rank: 'Q', suit: '♣' }, { rank: '10', suit: '♦' }],
-      [{ rank: '10', suit: '♥' }, { rank: '10', suit: '♠' }],
-      [{ rank: 'A', suit: '♦' }, { rank: '4', suit: '♣' }]
+      [
+        { rank: 'A', suit: '♠' },
+        { rank: 'K', suit: '♠' }
+      ],
+      [
+        { rank: 'Q', suit: '♣' },
+        { rank: '10', suit: '♦' }
+      ],
+      [
+        { rank: '10', suit: '♥' },
+        { rank: '10', suit: '♠' }
+      ],
+      [
+        { rank: 'A', suit: '♦' },
+        { rank: '4', suit: '♣' }
+      ]
     ]
   },
   {
     winner: '1',
     digit: '9',
     hint: 'A straight uses five consecutive ranks. Check all possible combinations.',
-    community: [{ rank: '10', suit: '♦' }, { rank: 'J', suit: '♣' }, { rank: 'Q', suit: '♥' }, { rank: '3', suit: '♣' }, { rank: '7', suit: '♠' }],
+    community: [
+      { rank: '10', suit: '♦' },
+      { rank: 'J', suit: '♣' },
+      { rank: 'Q', suit: '♥' },
+      { rank: '3', suit: '♣' },
+      { rank: '7', suit: '♠' }
+    ],
     players: [
-      [{ rank: 'K', suit: '♠' }, { rank: 'A', suit: '♥' }],
-      [{ rank: 'Q', suit: '♣' }, { rank: 'Q', suit: '♦' }],
-      [{ rank: '9', suit: '♥' }, { rank: '8', suit: '♥' }],
-      [{ rank: 'J', suit: '♦' }, { rank: '7', suit: '♣' }]
+      [
+        { rank: 'K', suit: '♠' },
+        { rank: 'A', suit: '♥' }
+      ],
+      [
+        { rank: 'Q', suit: '♣' },
+        { rank: 'Q', suit: '♦' }
+      ],
+      [
+        { rank: '9', suit: '♥' },
+        { rank: '8', suit: '♥' }
+      ],
+      [
+        { rank: 'J', suit: '♦' },
+        { rank: '7', suit: '♣' }
+      ]
     ]
   }
 ];
@@ -80,18 +188,48 @@ const pokerScenarios = [
 const sudokuScenarios = [
   {
     target: 'C3',
-    grid: [['1', '?', '3', '?'], ['?', '4', '?', '2'], ['2', '?', '?', '?'], ['?', '3', '2', '1']],
-    solution: [['1', '2', '3', '4'], ['3', '4', '1', '2'], ['2', '1', '4', '3'], ['4', '3', '2', '1']]
+    grid: [
+      ['1', '?', '3', '?'],
+      ['?', '4', '?', '2'],
+      ['2', '?', '?', '?'],
+      ['?', '3', '2', '1']
+    ],
+    solution: [
+      ['1', '2', '3', '4'],
+      ['3', '4', '1', '2'],
+      ['2', '1', '4', '3'],
+      ['4', '3', '2', '1']
+    ]
   },
   {
     target: 'B4',
-    grid: [['2', '?', '4', '?'], ['?', '3', '?', '1'], ['1', '?', '3', '4'], ['3', '?', '1', '?']],
-    solution: [['2', '1', '4', '3'], ['4', '3', '2', '1'], ['1', '2', '3', '4'], ['3', '4', '1', '2']]
+    grid: [
+      ['2', '?', '4', '?'],
+      ['?', '3', '?', '1'],
+      ['1', '?', '3', '4'],
+      ['3', '?', '1', '?']
+    ],
+    solution: [
+      ['2', '1', '4', '3'],
+      ['4', '3', '2', '1'],
+      ['1', '2', '3', '4'],
+      ['3', '4', '1', '2']
+    ]
   },
   {
     target: 'A1',
-    grid: [['?', '3', '?', '2'], ['4', '?', '1', '?'], ['?', '1', '?', '4'], ['2', '?', '3', '1']],
-    solution: [['1', '3', '4', '2'], ['4', '2', '1', '3'], ['3', '1', '2', '4'], ['2', '4', '3', '1']]
+    grid: [
+      ['?', '3', '?', '2'],
+      ['4', '?', '1', '?'],
+      ['?', '1', '?', '4'],
+      ['2', '?', '3', '1']
+    ],
+    solution: [
+      ['1', '3', '4', '2'],
+      ['4', '2', '1', '3'],
+      ['3', '1', '2', '4'],
+      ['2', '4', '3', '1']
+    ]
   }
 ];
 
@@ -110,6 +248,35 @@ const wordleScenarios = [
   { word: 'LOGIN', digit: '6', clue: 'The first step to regain access to locked systems.' },
   { word: 'EMAIL', digit: '3', clue: 'The communication channel the AI intercepted first.' }
 ];
+
+// Queens (Room 5)
+const QUEENS_ROWS = 7;
+const QUEENS_COLS = 7;
+
+const queensRegions = [
+  ['A', 'A', 'B', 'B', 'C', 'C', 'G'],
+  ['A', 'A', 'B', 'B', 'C', 'C', 'G'],
+  ['A', 'D', 'B', 'E', 'C', 'C', 'F'],
+  ['D', 'D', 'E', 'E', 'F', 'F', 'F'],
+  ['D', 'D', 'E', 'E', 'F', 'F', 'F'],
+  ['G', 'G', 'G', 'G', 'F', 'F', 'F'],
+  ['G', 'G', 'G', 'G', 'G', 'G', 'G']
+];
+
+const queensSolution = [
+  [0, 1],
+  [1, 3],
+  [2, 5],
+  [3, 0],
+  [4, 2],
+  [5, 4],
+  [6, 6]
+];
+
+function deriveQueensDigit() {
+  const sumCols = queensSolution.reduce((acc, [, col]) => acc + col, 0);
+  return String(sumCols % 10); // 1 digit from queens puzzle
+}
 
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -133,27 +300,25 @@ function buildSudokuEntries(grid) {
   return entries;
 }
 
-// random character from nerdle equation
 function randomCharFromEquation(equation) {
   const eq = String(equation || '');
   if (!eq.length) return '?';
   const index = Math.floor(Math.random() * eq.length);
-  return eq[index];
+  return eq[index]; // 1-character code fragment
 }
 
-// A=1, B=2, ..., Z=26 helper (for your external instructions)
 function letterToIndex(letter) {
   const code = String(letter || '').toUpperCase().charCodeAt(0);
   if (code < 65 || code > 90) return 0;
-  return code - 64;
+  return code - 64; // A=1, B=2, ..., Z=26
 }
 
-// internal sum if you ever need it (not shown to the player)
 function deriveWordleCode(word) {
   const sum = String(word || '')
     .toUpperCase()
     .split('')
     .reduce((acc, ch) => acc + letterToIndex(ch), 0);
+  // 3-digit string from Wordle (e.g., 7 -> "007")
   return String(sum).padStart(3, '0');
 }
 
@@ -165,14 +330,16 @@ function createGame() {
   const row = Number(sudoku.target.slice(1)) - 1;
   const col = COLS.indexOf(sudoku.target[0]);
 
-  const nerdleCodeChar = randomCharFromEquation(nerdle.equation);
-  const wordleCode = deriveWordleCode(wordle.word);
+  const nerdleCodeChar = randomCharFromEquation(nerdle.equation); // 1 char from Nerdle
+  const wordleCode = deriveWordleCode(wordle.word); // 3 chars from Wordle
+  const queensDigit = deriveQueensDigit(); // 1 digit from Queens
 
   return {
-    poker,
-    sudoku: { ...sudoku, digit: sudoku.solution[row][col] },
-    nerdle: { ...nerdle, digit: nerdleCodeChar },
-    wordle: { ...wordle, digit: wordleCode }
+    poker, // 1 digit
+    sudoku: { ...sudoku, digit: sudoku.solution[row][col] }, // 1 digit
+    nerdle: { ...nerdle, digit: nerdleCodeChar }, // 1 char
+    wordle: { ...wordle, digit: wordleCode }, // 3-digit string
+    queens: { digit: queensDigit } // 1 digit
   };
 }
 
@@ -289,7 +456,9 @@ function App() {
   const [game, setGame] = useState(() => createGame());
   const [timeLeft, setTimeLeft] = useState(1800);
   const [pokerAnswer, setPokerAnswer] = useState('');
-  const [sudokuEntries, setSudokuEntries] = useState(() => buildSudokuEntries(game.sudoku.grid));
+  const [sudokuEntries, setSudokuEntries] = useState(() =>
+    buildSudokuEntries(game.sudoku.grid)
+  );
   const [nerdleGuess, setNerdleGuess] = useState('');
   const [nerdleGuesses, setNerdleGuesses] = useState([]);
   const [nerdleMessage, setNerdleMessage] = useState('');
@@ -298,13 +467,21 @@ function App() {
   const [wordleMessage, setWordleMessage] = useState('');
   const [showPokerHint, setShowPokerHint] = useState(false);
 
+  const [queensBoard, setQueensBoard] = useState(
+    () => Array.from({ length: QUEENS_ROWS }, () => Array(QUEENS_COLS).fill('blank'))
+  );
+
   useEffect(() => {
-    const timer = setInterval(() => setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0)), 1000);
+    const timer = setInterval(
+      () => setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0)),
+      1000
+    );
     return () => clearInterval(timer);
   }, []);
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
+
   const sudokuRow = Number(game.sudoku.target.slice(1)) - 1;
   const sudokuCol = COLS.indexOf(game.sudoku.target[0]);
   const sudokuTargetAnswer = game.sudoku.solution[sudokuRow][sudokuCol];
@@ -314,12 +491,41 @@ function App() {
   const sudokuDone = sudokuTargetEntry === sudokuTargetAnswer;
   const nerdleDone = nerdleGuesses.includes(game.nerdle.equation);
   const wordleDone = wordleGuesses.includes(game.wordle.word);
-  const completed = [pokerDone, sudokuDone, nerdleDone, wordleDone];
+
+  const queensDone = (() => {
+    const queenPositions = [];
+    for (let r = 0; r < QUEENS_ROWS; r += 1) {
+      for (let c = 0; c < QUEENS_COLS; c += 1) {
+        if (queensBoard[r][c] === 'queen') queenPositions.push([r, c]);
+      }
+    }
+    if (queenPositions.length !== queensSolution.length) return false;
+    const key = (rc) => `${rc[0]}-${rc[1]}`;
+    const setSolution = new Set(queensSolution.map(key));
+    return queenPositions.every((pos) => setSolution.has(key(pos)));
+  })();
+
+  const completed = [pokerDone, sudokuDone, nerdleDone, wordleDone, queensDone];
   const solvedCount = completed.filter(Boolean).length;
-  const progress = solvedCount * 25;
-  const digits = [game.poker.digit, game.sudoku.digit, game.nerdle.digit, game.wordle.digit];
-  const codeFragments = digits.map((digit, index) => (completed[index] ? digit : '_')).join(' ');
-  const fullCode = digits.join('');
+  const progress = (solvedCount / 5) * 100;
+
+  // Final code structure:
+  // 1 from poker, 1 from sudoku, 1 from nerdle, 3 from wordle, 1 from queens -> total 7 chars
+  const fullCode =
+    game.poker.digit +
+    game.sudoku.digit +
+    game.nerdle.digit +
+    game.wordle.digit +
+    game.queens.digit;
+
+  const codeFragments = [
+    completed[0] ? game.poker.digit : '_',
+    completed[1] ? game.sudoku.digit : '_',
+    completed[2] ? game.nerdle.digit : '_',
+    // Wordle is 3-digit chunk; show either all 3 or ___
+    completed[3] ? game.wordle.digit : '___',
+    completed[4] ? game.queens.digit : '_'
+  ].join(' ');
 
   const editableCells = Object.keys(sudokuEntries);
   const filledCells = editableCells.filter((key) => sudokuEntries[key] !== '').length;
@@ -342,6 +548,9 @@ function App() {
     setWordleGuesses([]);
     setWordleMessage('');
     setShowPokerHint(false);
+    setQueensBoard(
+      Array.from({ length: QUEENS_ROWS }, () => Array(QUEENS_COLS).fill('blank'))
+    );
   }
 
   function updateSudoku(cell, value) {
@@ -408,6 +617,23 @@ function App() {
     return `${base} tileAbsent`;
   }
 
+  function handleQueenClick(row, col) {
+    setQueensBoard((prev) => {
+      const next = prev.map((r) => [...r]);
+      const current = next[row][col];
+      if (current === 'blank') next[row][col] = 'x';
+      else if (current === 'x') next[row][col] = 'queen';
+      else next[row][col] = 'blank';
+      return next;
+    });
+  }
+
+  function queensCellClass(row, col) {
+    const state = queensBoard[row][col]; // 'blank' | 'x' | 'queen'
+    const region = queensRegions[row][col];
+    return `queensCell queensCell-${region} queensCell-${state}`;
+  }
+
   return (
     <div className="appBackground">
       <div className="shell">
@@ -415,78 +641,110 @@ function App() {
           <div>
             <p className="eyebrow">Digital Escape Room</p>
             <h1>AI Has Taken Over the Office</h1>
-            <p className="subtle">Solve four puzzle rooms to recover the shutdown code and restore human control.</p>
+            <p className="subtle">
+              Solve five puzzle rooms to recover the 7-character shutdown code and restore human
+              control.
+            </p>
           </div>
-          <button className="resetButton" onClick={resetGame}>Reset and Randomize</button>
+          <button className="resetButton" onClick={resetGame}>
+            Reset and Randomize
+          </button>
         </header>
 
         <div className="dashboard">
           <div className="statCard redCard">
             <p className="statLabel">Countdown</p>
-            <p className="timerText">{String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}</p>
+            <p className="timerText">
+              {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+            </p>
           </div>
           <div className="statCard wideCard">
             <div className="progressHeader">
               <p className="statLabel">Mission Progress</p>
-              <p className="cyanText">{solvedCount}/4 rooms</p>
+              <p className="cyanText">{solvedCount}/5 rooms</p>
             </div>
             <div className="progressBar">
               <div className="progressFill" style={{ width: `${progress}%` }} />
             </div>
             <div className="roomStatusGrid">
               {completed.map((done, index) => (
-                <div key={index} className={`statusPill ${done ? 'done' : ''}`}>Room {index + 1}</div>
+                <div key={index} className={`statusPill ${done ? 'done' : ''}`}>
+                  Room {index + 1}
+                </div>
               ))}
             </div>
           </div>
         </div>
 
-        <RoomCard number="1" title="Casino Firewall" subtitle="Find the Texas Holdem winner. The winning player number becomes the first digit." done={pokerDone}>
+        <RoomCard
+          number="1"
+          title="Casino Firewall"
+          subtitle="Find the Texas Holdem winner. The winning player number becomes the first character."
+          done={pokerDone}
+        >
           <div className="pokerGrid">
             <div className="greenPanel">
               <p className="panelLabel">Community Cards</p>
-              <div className="largeCards"><Cards cards={game.poker.community} /></div>
+              <div className="largeCards">
+                <Cards cards={game.poker.community} />
+              </div>
             </div>
             <div className="playersGrid">
               {game.poker.players.map((hand, index) => (
-                <div key={index} className="playerPanel">Player {index + 1}<br /><Cards cards={hand} /></div>
+                <div key={index} className="playerPanel">
+                  Player {index + 1}
+                  <br />
+                  <Cards cards={hand} />
+                </div>
               ))}
             </div>
           </div>
 
           {showPokerHint ? (
             <div>
-              <p className="subtle hintText">
-                Hint: {game.poker.hint}
-              </p>
-
-              <button
-                className="purpleButton"
-                onClick={() => setShowPokerHint(false)}
-              >
+              <p className="subtle hintText">Hint: {game.poker.hint}</p>
+              <button className="purpleButton" onClick={() => setShowPokerHint(false)}>
                 Hide Hint
               </button>
             </div>
           ) : (
-            <button
-              className="purpleButton"
-              onClick={() => setShowPokerHint(true)}
-            >
+            <button className="purpleButton" onClick={() => setShowPokerHint(true)}>
               Show Hint
             </button>
           )}
 
           <div className="inputRow">
-            <input value={pokerAnswer} onChange={(event) => setPokerAnswer(event.target.value)} placeholder="Winning player number" className="textInput" />
-            {pokerDone && <p className="successText">Correct. Digit unlocked: {game.poker.digit}</p>}
+            <input
+              value={pokerAnswer}
+              onChange={(event) => setPokerAnswer(event.target.value)}
+              placeholder="Winning player number"
+              className="textInput"
+            />
+            {pokerDone && (
+              <p className="successText">
+                Correct. Character unlocked: {game.poker.digit}
+              </p>
+            )}
           </div>
         </RoomCard>
 
-        <RoomCard number="2" title="Spreadsheet Audit Sudoku" subtitle={`Solve the grid and determine cell ${game.sudoku.target}. That value becomes the second digit.`} done={sudokuDone}>
+        <RoomCard
+          number="2"
+          title="Spreadsheet Audit Sudoku"
+          subtitle={`Solve the grid and determine cell ${game.sudoku.target}. That value becomes the second character.`}
+          done={sudokuDone}
+        >
           <div className="sudokuLayout">
             <div className="tableScroll">
               <table className="sudokuTable">
-                <thead><tr><th></th>{COLS.map((col) => <th key={col}>{col}</th>)}</tr></thead>
+                <thead>
+                  <tr>
+                    <th></th>
+                    {COLS.map((col) => (
+                      <th key={col}>{col}</th>
+                    ))}
+                  </tr>
+                </thead>
                 <tbody>
                   {game.sudoku.grid.map((row, rowIndex) => (
                     <tr key={rowIndex}>
@@ -495,7 +753,19 @@ function App() {
                         const currentRef = getCellRef(rowIndex, colIndex);
                         return (
                           <td key={currentRef}>
-                            {cell === '?' ? <input value={sudokuEntries[currentRef] || ''} onChange={(event) => updateSudoku(currentRef, event.target.value)} className={sudokuStyle(currentRef, rowIndex, colIndex)} inputMode="numeric" maxLength={1} /> : <div className="fixedCell">{cell}</div>}
+                            {cell === '?' ? (
+                              <input
+                                value={sudokuEntries[currentRef] || ''}
+                                onChange={(event) =>
+                                  updateSudoku(currentRef, event.target.value)
+                                }
+                                className={sudokuStyle(currentRef, rowIndex, colIndex)}
+                                inputMode="numeric"
+                                maxLength={1}
+                              />
+                            ) : (
+                              <div className="fixedCell">{cell}</div>
+                            )}
                           </td>
                         );
                       })}
@@ -506,61 +776,194 @@ function App() {
             </div>
             <div className="auditPanel">
               <h3>Audit Panel</h3>
-              <p>Filled cells: <b>{filledCells}/{editableCells.length}</b></p>
-              <p>Correct entries: <b>{correctCells}/{editableCells.length}</b></p>
-              <p>Target cell: <b className="redText">{game.sudoku.target}</b></p>
-              {sudokuDone && <p className="successText">Correct. Digit unlocked: {game.sudoku.digit}</p>}
+              <p>
+                Filled cells: <b>{filledCells}/{editableCells.length}</b>
+              </p>
+              <p>
+                Correct entries: <b>{correctCells}/{editableCells.length}</b>
+              </p>
+              <p>
+                Target cell: <b className="redText">{game.sudoku.target}</b>
+              </p>
+              {sudokuDone && (
+                <p className="successText">
+                  Correct. Character unlocked: {game.sudoku.digit}
+                </p>
+              )}
             </div>
           </div>
         </RoomCard>
 
-        <RoomCard number="3" title="AI Equation Firewall" subtitle="Guess the hidden 8-character equation. Valid equations can use +, -, *, /, and =." done={nerdleDone}>
+        <RoomCard
+          number="3"
+          title="AI Equation Firewall"
+          subtitle="Guess the hidden 8-character equation. Then extract the specified character for the code."
+          done={nerdleDone}
+        >
           <div className="gamePanel">
-            <p className="subtle">Clue: <b>{game.nerdle.clue}</b></p>
+            <p className="subtle">
+              Clue: <b>{game.nerdle.clue}</b>
+            </p>
             <div className="tileRows">
               {nerdleGuesses.map((guess, rowIndex) => {
                 const statuses = evaluateGuess(guess, game.nerdle.equation);
-                return <div key={`${guess}-${rowIndex}`} className="tileRow">{guess.split('').map((ch, index) => <div key={index} className={tileClass(statuses[index])}>{ch}</div>)}</div>;
+                return (
+                  <div key={`${guess}-${rowIndex}`} className="tileRow">
+                    {guess.split('').map((ch, index) => (
+                      <div key={index} className={tileClass(statuses[index])}>
+                        {ch}
+                      </div>
+                    ))}
+                  </div>
+                );
               })}
-              {!nerdleDone && <div className="tileRow">{Array.from({ length: 8 }).map((_, index) => <div key={index} className="tile">{nerdleGuess[index] || ''}</div>)}</div>}
+              {!nerdleDone && (
+                <div className="tileRow">
+                  {Array.from({ length: 8 }).map((_, index) => (
+                    <div key={index} className="tile">
+                      {nerdleGuess[index] || ''}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="inputRow centeredRow">
-              <input value={nerdleGuess} onChange={(event) => setNerdleGuess(cleanEquation(event.target.value))} onKeyDown={(event) => { if (event.key === 'Enter') submitNerdle(); }} disabled={nerdleDone} placeholder="Enter 8-char equation" className="textInput" />
-              <button onClick={submitNerdle} disabled={nerdleDone} className="purpleButton">Submit</button>
+              <input
+                value={nerdleGuess}
+                onChange={(event) => setNerdleGuess(cleanEquation(event.target.value))}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') submitNerdle();
+                }}
+                disabled={nerdleDone}
+                placeholder="Enter 8-char equation"
+                className="textInput"
+              />
+              <button onClick={submitNerdle} disabled={nerdleDone} className="purpleButton">
+                Submit
+              </button>
             </div>
-            {nerdleMessage && <p className={nerdleDone ? 'successText' : 'subtle'}>{nerdleMessage}</p>}
+            {nerdleMessage && (
+              <p className={nerdleDone ? 'successText' : 'subtle'}>{nerdleMessage}</p>
+            )}
             <Legend />
           </div>
         </RoomCard>
 
-        <RoomCard number="4" title="AI Word Firewall" subtitle="Guess the 5-letter office AI word. Then convert it to a 3-digit code." done={wordleDone}>
+        <RoomCard
+          number="4"
+          title="AI Word Firewall"
+          subtitle="Guess the 5-letter office AI word, then convert it into a 3-digit number."
+          done={wordleDone}
+        >
           <div className="gamePanel">
             <p className="subtle">
               Clue: <b>{game.wordle.clue}</b>
             </p>
-            <p className="subtle" style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-              After you find the word, use this key: A=1, B=2, ..., Z=26. Add all five letter values to get a 3-digit number for your final code sheet.
+            <p
+              className="subtle"
+              style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}
+            >
+              After you find the word, use this key: A=1, B=2, ..., Z=26. Add all five letter
+              values to get a 3-digit number segment for your final code sheet.
             </p>
             <div className="tileRows">
               {wordleGuesses.map((guess, rowIndex) => {
                 const statuses = evaluateGuess(guess, game.wordle.word);
-                return <div key={`${guess}-${rowIndex}`} className="tileRow">{guess.split('').map((ch, index) => <div key={index} className={tileClass(statuses[index], true)}>{ch}</div>)}</div>;
+                return (
+                  <div key={`${guess}-${rowIndex}`} className="tileRow">
+                    {guess.split('').map((ch, index) => (
+                      <div key={index} className={tileClass(statuses[index], true)}>
+                        {ch}
+                      </div>
+                    ))}
+                  </div>
+                );
               })}
-              {!wordleDone && <div className="tileRow">{[0, 1, 2, 3, 4].map((index) => <div key={index} className="tile wordTile">{wordleGuess[index] || ''}</div>)}</div>}
+              {!wordleDone && (
+                <div className="tileRow">
+                  {[0, 1, 2, 3, 4].map((index) => (
+                    <div key={index} className="tile wordTile">
+                      {wordleGuess[index] || ''}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="inputRow centeredRow">
-              <input value={wordleGuess} onChange={(event) => setWordleGuess(event.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 5))} onKeyDown={(event) => { if (event.key === 'Enter') submitWordle(); }} disabled={wordleDone} placeholder="Enter 5-letter word" className="textInput uppercaseInput" />
-              <button onClick={submitWordle} disabled={wordleDone} className="purpleButton">Submit</button>
+              <input
+                value={wordleGuess}
+                onChange={(event) =>
+                  setWordleGuess(
+                    event.target.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 5)
+                  )
+                }
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') submitWordle();
+                }}
+                disabled={wordleDone}
+                placeholder="Enter 5-letter word"
+                className="textInput uppercaseInput"
+              />
+              <button onClick={submitWordle} disabled={wordleDone} className="purpleButton">
+                Submit
+              </button>
             </div>
-            {wordleMessage && <p className={wordleDone ? 'successText' : 'subtle'}>{wordleMessage}</p>}
+            {wordleMessage && (
+              <p className={wordleDone ? 'successText' : 'subtle'}>{wordleMessage}</p>
+            )}
             <Legend />
+          </div>
+        </RoomCard>
+
+        <RoomCard
+          number="5"
+          title="Queens Firewall"
+          subtitle="Place one queen in each row, column, and color region with no queens attacking each other."
+          done={queensDone}
+        >
+          <div className="gamePanel">
+            <p className="subtle">
+              Click a tile to cycle: blank → X → queen. Use X to mark impossible spots.
+            </p>
+            <div className="tableScroll">
+              <table className="queensTable">
+                <tbody>
+                  {Array.from({ length: QUEENS_ROWS }).map((_, r) => (
+                    <tr key={r}>
+                      {Array.from({ length: QUEENS_COLS }).map((__, c) => (
+                        <td
+                          key={c}
+                          className={queensCellClass(r, c)}
+                          onClick={() => handleQueenClick(r, c)}
+                        >
+                          {queensBoard[r][c] === 'queen'
+                            ? '♛'
+                            : queensBoard[r][c] === 'x'
+                            ? '×'
+                            : ''}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {queensDone && (
+              <p className="successText">
+                Correct queens placement. Character unlocked: {game.queens.digit}
+              </p>
+            )}
           </div>
         </RoomCard>
 
         <div className="codePanel">
           <p className="statLabel">Shutdown Code Fragments</p>
           <p className="codeText">{codeFragments}</p>
-          {solvedCount === 4 && <p className="successText">Final shutdown code recovered: {fullCode}. The office has been saved.</p>}
+          {solvedCount === 5 && (
+            <p className="successText">
+              Final 7-character shutdown code recovered: {fullCode}. The office has been saved.
+            </p>
+          )}
         </div>
       </div>
     </div>
