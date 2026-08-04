@@ -6,7 +6,7 @@ const pokerScenarios = [
   {
     winner: '4',
     digit: '4',
-    hint: 'Player 4 makes a royal flush.',
+    hint: 'Remember the poker hand rankings. One player can make an extremely powerful hand using the community cards.',
     community: [{ rank: 'A', suit: '♠' }, { rank: 'K', suit: '♠' }, { rank: 'Q', suit: '♠' }, { rank: '9', suit: '♦' }, { rank: '2', suit: '♣' }],
     players: [
       [{ rank: 'A', suit: '♥' }, { rank: '9', suit: '♣' }],
@@ -18,7 +18,7 @@ const pokerScenarios = [
   {
     winner: '2',
     digit: '7',
-    hint: 'Player 2 makes four aces.',
+    hint: 'Check whether any player can use the community cards to form four of a kind.',
     community: [{ rank: 'A', suit: '♠' }, { rank: 'A', suit: '♥' }, { rank: 'A', suit: '♦' }, { rank: 'K', suit: '♣' }, { rank: '3', suit: '♣' }],
     players: [
       [{ rank: 'K', suit: '♠' }, { rank: 'Q', suit: '♠' }],
@@ -30,7 +30,7 @@ const pokerScenarios = [
   {
     winner: '1',
     digit: '2',
-    hint: 'Player 1 makes a straight flush.',
+    hint: 'Look for players who can connect five cards in sequence of the same suit.',
     community: [{ rank: '6', suit: '♥' }, { rank: '7', suit: '♥' }, { rank: '8', suit: '♥' }, { rank: 'K', suit: '♣' }, { rank: 'K', suit: '♦' }],
     players: [
       [{ rank: '5', suit: '♥' }, { rank: '9', suit: '♥' }],
@@ -42,7 +42,7 @@ const pokerScenarios = [
   {
     winner: '3',
     digit: '8',
-    hint: 'Player 3 has the highest flush.',
+    hint: 'If multiple players make a flush, compare the highest cards in each flush.',
     community: [{ rank: '2', suit: '♣' }, { rank: '6', suit: '♣' }, { rank: '9', suit: '♣' }, { rank: 'Q', suit: '♦' }, { rank: '4', suit: '♥' }],
     players: [
       [{ rank: 'A', suit: '♦' }, { rank: 'A', suit: '♥' }],
@@ -54,7 +54,7 @@ const pokerScenarios = [
   {
     winner: '2',
     digit: '6',
-    hint: 'Player 2 makes a full house with queens over tens.',
+    hint: 'See whether any player can combine three matching cards and two matching cards into a full house.',
     community: [{ rank: 'Q', suit: '♠' }, { rank: 'Q', suit: '♦' }, { rank: '10', suit: '♣' }, { rank: '4', suit: '♥' }, { rank: '2', suit: '♣' }],
     players: [
       [{ rank: 'A', suit: '♠' }, { rank: 'K', suit: '♠' }],
@@ -66,7 +66,7 @@ const pokerScenarios = [
   {
     winner: '1',
     digit: '9',
-    hint: 'Player 1 has the ace-high straight.',
+    hint: 'A straight uses five consecutive ranks. Check all possible combinations.',
     community: [{ rank: '10', suit: '♦' }, { rank: 'J', suit: '♣' }, { rank: 'Q', suit: '♥' }, { rank: '3', suit: '♣' }, { rank: '7', suit: '♠' }],
     players: [
       [{ rank: 'K', suit: '♠' }, { rank: 'A', suit: '♥' }],
@@ -268,6 +268,7 @@ function App() {
   const [wordleGuess, setWordleGuess] = useState('');
   const [wordleGuesses, setWordleGuesses] = useState([]);
   const [wordleMessage, setWordleMessage] = useState('');
+  const [showPokerHint, setShowPokerHint] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0)), 1000);
@@ -312,6 +313,7 @@ function App() {
     setWordleGuess('');
     setWordleGuesses([]);
     setWordleMessage('');
+    setShowPokerHint(false);
   }
 
   function updateSudoku(cell, value) {
@@ -360,7 +362,7 @@ function App() {
     }
     setWordleGuesses((prev) => [...prev, guess]);
     setWordleGuess('');
-    setWordleMessage(guess === game.wordle.word ? `Solved. Digit unlocked: ${game.wordle.digit}` : 'Guess submitted. Use the colors to narrow it down.');
+    setWordleMessage(guess === game.wordle.word ? `Solved. Digit unlocked: {game.wordle.digit}` : 'Guess submitted. Use the colors to narrow it down.');
   }
 
   function tileClass(status, isWord = false) {
@@ -415,7 +417,29 @@ function App() {
               ))}
             </div>
           </div>
-          <p className="subtle hintText">Hint: {game.poker.hint}</p>
+
+          {showPokerHint ? (
+            <div>
+              <p className="subtle hintText">
+                Hint: {game.poker.hint}
+              </p>
+
+              <button
+                className="purpleButton"
+                onClick={() => setShowPokerHint(false)}
+              >
+                Hide Hint
+              </button>
+            </div>
+          ) : (
+            <button
+              className="purpleButton"
+              onClick={() => setShowPokerHint(true)}
+            >
+              Show Hint
+            </button>
+          )}
+
           <div className="inputRow">
             <input value={pokerAnswer} onChange={(event) => setPokerAnswer(event.target.value)} placeholder="Winning player number" className="textInput" />
             {pokerDone && <p className="successText">Correct. Digit unlocked: {game.poker.digit}</p>}
