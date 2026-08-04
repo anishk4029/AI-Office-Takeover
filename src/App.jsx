@@ -499,7 +499,7 @@ function App() {
       }
     }
     if (queenPositions.length !== queensSolution.length) return false;
-    const key = (rc) => `$${rc[0]}-$${rc[1]}`;
+    const key = (rc) => `${rc[0]}-${rc[1]}`;
     const setSolution = new Set(queensSolution.map(key));
     return queenPositions.every((pos) => setSolution.has(key(pos)));
   })();
@@ -556,7 +556,7 @@ function App() {
 
   function sudokuStyle(cell, row, col) {
     const value = sudokuEntries[cell] || '';
-       const correct = game.sudoku.solution[row][col];
+    const correct = game.sudoku.solution[row][col];
     const isTarget = cell === game.sudoku.target;
     if (isTarget && value === '') return 'targetCell';
     if (isTarget && value === correct) return 'correctCell targetSolvedCell';
@@ -627,7 +627,7 @@ function App() {
   function queensCellClass(row, col) {
     const state = queensBoard[row][col];
     const region = queensRegions[row][col];
-    return `queensCell queensCell-$${region} queensCell-$${state}`;
+    return `queensCell queensCell-${region} queensCell-${state}`;
   }
 
   return (
@@ -804,7 +804,7 @@ function App() {
               {nerdleGuesses.map((guess, rowIndex) => {
                 const statuses = evaluateGuess(guess, game.nerdle.equation);
                 return (
-                  <div key={`$${guess}-$${rowIndex}`} className="tileRow">
+                  <div key={`${guess}-${rowIndex}`} className="tileRow">
                     {guess.split('').map((ch, index) => (
                       <div key={index} className={tileClass(statuses[index])}>
                         {ch}
@@ -866,7 +866,7 @@ function App() {
               {wordleGuesses.map((guess, rowIndex) => {
                 const statuses = evaluateGuess(guess, game.wordle.word);
                 return (
-                  <div key={`$${guess}-$${rowIndex}`} className="tileRow">
+                  <div key={`${guess}-${rowIndex}`} className="tileRow">
                     {guess.split('').map((ch, index) => (
                       <div key={index} className={tileClass(statuses[index], true)}>
                         {ch}
