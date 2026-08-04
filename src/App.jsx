@@ -133,6 +133,30 @@ function buildSudokuEntries(grid) {
   return entries;
 }
 
+// random character from nerdle equation
+function randomCharFromEquation(equation) {
+  const eq = String(equation || '');
+  if (!eq.length) return '?';
+  const index = Math.floor(Math.random() * eq.length);
+  return eq[index];
+}
+
+// A=1, B=2, ..., Z=26 helper (for your external instructions)
+function letterToIndex(letter) {
+  const code = String(letter || '').toUpperCase().charCodeAt(0);
+  if (code < 65 || code > 90) return 0;
+  return code - 64;
+}
+
+// internal sum if you ever need it (not shown to the player)
+function deriveWordleCode(word) {
+  const sum = String(word || '')
+    .toUpperCase()
+    .split('')
+    .reduce((acc, ch) => acc + letterToIndex(ch), 0);
+  return String(sum).padStart(3, '0');
+}
+
 function createGame() {
   const poker = pick(pokerScenarios);
   const sudoku = pick(sudokuScenarios);
@@ -140,11 +164,15 @@ function createGame() {
   const wordle = pick(wordleScenarios);
   const row = Number(sudoku.target.slice(1)) - 1;
   const col = COLS.indexOf(sudoku.target[0]);
+
+  const nerdleCodeChar = randomCharFromEquation(nerdle.equation);
+  const wordleCode = deriveWordleCode(wordle.word);
+
   return {
     poker,
     sudoku: { ...sudoku, digit: sudoku.solution[row][col] },
-    nerdle,
-    wordle
+    nerdle: { ...nerdle, digit: nerdleCodeChar },
+    wordle: { ...wordle, digit: wordleCode }
   };
 }
 
@@ -268,12 +296,7 @@ function App() {
   const [wordleGuess, setWordleGuess] = useState('');
   const [wordleGuesses, setWordleGuesses] = useState([]);
   const [wordleMessage, setWordleMessage] = useState('');
-
-  // Hint visibility state for all puzzles
   const [showPokerHint, setShowPokerHint] = useState(false);
-  const [showSudokuHint, setShowSudokuHint] = useState(false);
-  const [showNerdleHint, setShowNerdleHint] = useState(false);
-  const [showWordleHint, setShowWordleHint] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0)), 1000);
@@ -318,12 +341,7 @@ function App() {
     setWordleGuess('');
     setWordleGuesses([]);
     setWordleMessage('');
-
-    // Hide all hints on reset
     setShowPokerHint(false);
-    setShowSudokuHint(false);
-    setShowNerdleHint(false);
-    setShowWordleHint(false);
   }
 
   function updateSudoku(cell, value) {
@@ -360,7 +378,11 @@ function App() {
     }
     setNerdleGuesses((prev) => [...prev, guess]);
     setNerdleGuess('');
-    setNerdleMessage(guess === game.nerdle.equation ? `Solved. Digit unlocked: ${game.nerdle.digit}` : 'Equation accepted. Use the colors to narrow it down.');
+    setNerdleMessage(
+      guess === game.nerdle.equation
+        ? 'Equation verified. Use a specific character from your solved equation as instructed in your puzzle sheet.'
+        : 'Equation accepted. Use the colors to narrow it down.'
+    );
   }
 
   function submitWordle() {
@@ -372,7 +394,11 @@ function App() {
     }
     setWordleGuesses((prev) => [...prev, guess]);
     setWordleGuess('');
-    setWordleMessage(guess === game.wordle.word ? `Solved. Digit unlocked: ${game.wordle.digit}` : 'Guess submitted. Use the colors to narrow it down.');
+    setWordleMessage(
+      guess === game.wordle.word
+        ? 'Word discovered. Now use the key A=1, B=2, ..., Z=26 to add up all the letters in the word and write that 3-digit total on your puzzle sheet.'
+        : 'Guess submitted. Use the colors to narrow it down.'
+    );
   }
 
   function tileClass(status, isWord = false) {
@@ -415,7 +441,6 @@ function App() {
           </div>
         </div>
 
-        {/* Room 1: Poker */}
         <RoomCard number="1" title="Casino Firewall" subtitle="Find the Texas Holdem winner. The winning player number becomes the first digit." done={pokerDone}>
           <div className="pokerGrid">
             <div className="greenPanel">
@@ -457,30 +482,7 @@ function App() {
           </div>
         </RoomCard>
 
-        {/* Room 2: Sudoku */}
         <RoomCard number="2" title="Spreadsheet Audit Sudoku" subtitle={`Solve the grid and determine cell ${game.sudoku.target}. That value becomes the second digit.`} done={sudokuDone}>
-          {showSudokuHint ? (
-            <div style={{ marginBottom: '0.75rem' }}>
-              <p className="subtle hintText">
-                Hint: Focus on small 4×4 Sudoku rules—each row, column, and 2×2 box must contain 1–4 exactly once.
-              </p>
-              <button
-                className="purpleButton"
-                onClick={() => setShowSudokuHint(false)}
-              >
-                Hide Hint
-              </button>
-            </div>
-          ) : (
-            <button
-              className="purpleButton"
-              style={{ marginBottom: '0.75rem' }}
-              onClick={() => setShowSudokuHint(true)}
-            >
-              Show Hint
-            </button>
-          )}
-
           <div className="sudokuLayout">
             <div className="tableScroll">
               <table className="sudokuTable">
@@ -512,32 +514,9 @@ function App() {
           </div>
         </RoomCard>
 
-        {/* Room 3: Nerdle */}
         <RoomCard number="3" title="AI Equation Firewall" subtitle="Guess the hidden 8-character equation. Valid equations can use +, -, *, /, and =." done={nerdleDone}>
-          {showNerdleHint ? (
-            <div>
-              <p className="subtle">
-                Clue: <b>{game.nerdle.clue}</b>
-              </p>
-              <button
-                className="purpleButton"
-                onClick={() => setShowNerdleHint(false)}
-                style={{ marginBottom: '0.75rem', marginTop: '0.5rem' }}
-              >
-                Hide Hint
-              </button>
-            </div>
-          ) : (
-            <button
-              className="purpleButton"
-              onClick={() => setShowNerdleHint(true)}
-              style={{ marginBottom: '0.75rem' }}
-            >
-              Show Hint
-            </button>
-          )}
-
           <div className="gamePanel">
+            <p className="subtle">Clue: <b>{game.nerdle.clue}</b></p>
             <div className="tileRows">
               {nerdleGuesses.map((guess, rowIndex) => {
                 const statuses = evaluateGuess(guess, game.nerdle.equation);
@@ -554,32 +533,14 @@ function App() {
           </div>
         </RoomCard>
 
-        {/* Room 4: Wordle */}
-        <RoomCard number="4" title="AI Word Firewall" subtitle="Guess the 5-letter office AI word. Each guess adds a new row." done={wordleDone}>
-          {showWordleHint ? (
-            <div>
-              <p className="subtle">
-                Clue: <b>{game.wordle.clue}</b>
-              </p>
-              <button
-                className="purpleButton"
-                onClick={() => setShowWordleHint(false)}
-                style={{ marginBottom: '0.75rem', marginTop: '0.5rem' }}
-              >
-                Hide Hint
-              </button>
-            </div>
-          ) : (
-            <button
-              className="purpleButton"
-              onClick={() => setShowWordleHint(true)}
-              style={{ marginBottom: '0.75rem' }}
-            >
-              Show Hint
-            </button>
-          )}
-
+        <RoomCard number="4" title="AI Word Firewall" subtitle="Guess the 5-letter office AI word. Then convert it to a 3-digit code." done={wordleDone}>
           <div className="gamePanel">
+            <p className="subtle">
+              Clue: <b>{game.wordle.clue}</b>
+            </p>
+            <p className="subtle" style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+              After you find the word, use this key: A=1, B=2, ..., Z=26. Add all five letter values to get a 3-digit number for your final code sheet.
+            </p>
             <div className="tileRows">
               {wordleGuesses.map((guess, rowIndex) => {
                 const statuses = evaluateGuess(guess, game.wordle.word);
