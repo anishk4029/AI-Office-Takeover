@@ -1,4 +1,3 @@
-```jsx
 import React, { useEffect, useState } from 'react';
 
 const COLS = ['A', 'B', 'C', 'D'];
@@ -417,6 +416,7 @@ function Cards({ cards }) {
   );
 }
 
+// FIXED: wrap the JSX in parentheses so the parser is happy
 function RoomCard({ number, title, subtitle, done, children }) {
   return (
     <section className="room">
@@ -428,7 +428,9 @@ function RoomCard({ number, title, subtitle, done, children }) {
             <p className="roomSubtitle">{subtitle}</p>
           </div>
         </div>
-        <span className={`unlockBadge ${done ? 'done' : ''}`}>{done ? 'Unlocked' : 'Locked'}</span>
+        <span className={`unlockBadge ${done ? 'done' : ''}`}>
+          {done ? 'Unlocked' : 'Locked'}
+        </span>
       </div>
       <div className="roomBody">{children}</div>
     </section>
@@ -460,7 +462,6 @@ function App() {
   const [wordleMessage, setWordleMessage] = useState('');
   const [showPokerHint, setShowPokerHint] = useState(false);
 
-  // New: user-entered 3-digit sum for Wordle code
   const [wordleCodeInput, setWordleCodeInput] = useState('');
   const [wordleCodeSolved, setWordleCodeSolved] = useState(false);
 
@@ -489,13 +490,11 @@ function App() {
   const nerdleDone = nerdleGuesses.includes(game.nerdle.equation);
   const wordleDone = wordleGuesses.includes(game.wordle.word);
 
-  // EASY queens: exactly one queen at the solution square
   const queensDone = (() => {
     const [solR, solC] = queensSolution[0];
     return queensBoard[solR][solC] === 'queen';
   })();
 
-  // Overall completion: Wordle counts as done when the sum has been entered correctly
   const completed = [pokerDone, sudokuDone, nerdleDone, wordleCodeSolved, queensDone];
   const solvedCount = completed.filter(Boolean).length;
   const progress = (solvedCount / 5) * 100;
@@ -610,7 +609,9 @@ function App() {
       setWordleCodeSolved(true);
       setWordleMessage('Correct sum. Wordle code segment unlocked.');
     } else {
-      setWordleMessage('That sum is not correct. Double-check the A=1..Z=26 values and try again.');
+      setWordleMessage(
+        'That sum is not correct. Double-check the A=1..Z=26 values and try again.'
+      );
     }
   }
 
@@ -918,7 +919,6 @@ function App() {
               </button>
             </div>
 
-            {/* Word sum input – only after the word is solved */}
             {wordleDone && (
               <div className="inputRow centeredRow" style={{ marginTop: '12px' }}>
                 <input
@@ -1005,4 +1005,3 @@ function App() {
 }
 
 export default App;
-```
