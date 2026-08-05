@@ -253,6 +253,7 @@ const wordleScenarios = [
 const QUEENS_ROWS = 7;
 const QUEENS_COLS = 7;
 
+// Same regions, but solution will be much simpler (main diagonal)
 const queensRegions = [
   ['A', 'A', 'B', 'B', 'C', 'C', 'G'],
   ['A', 'A', 'B', 'B', 'C', 'C', 'G'],
@@ -263,13 +264,14 @@ const queensRegions = [
   ['G', 'G', 'G', 'G', 'G', 'G', 'G']
 ];
 
+// Easy solution: one queen on each main-diagonal square (0,0)...(6,6)
 const queensSolution = [
-  [0, 1],
-  [1, 3],
-  [2, 5],
-  [3, 0],
-  [4, 2],
-  [5, 4],
+  [0, 0],
+  [1, 1],
+  [2, 2],
+  [3, 3],
+  [4, 4],
+  [5, 5],
   [6, 6]
 ];
 
@@ -914,12 +916,12 @@ function App() {
         <RoomCard
           number="5"
           title="Queens Firewall"
-          subtitle="Place one queen in each row, column, and color region with no queens attacking each other."
+          subtitle="Place one queen in each row and column with no queens attacking each other."
           done={queensDone}
         >
           <div className="gamePanel">
             <p className="subtle">
-              Click a tile to cycle: blank → X → queen. Use X to mark impossible spots.
+              Click a tile to cycle: blank → X → queen. Use X to mark impossible spots. The correct pattern is simpler than it first appears.
             </p>
             <div className="tableScroll">
               <table className="queensTable">
