@@ -1,34 +1,3 @@
-Got it, thanks for clarifying.
-
-You want the correct Queens solution to be (1‑based):
-
-- (1,5)
-- (2,2)
-- (3,4)
-- (4,1)
-- (5,3)
-
-In 0‑based coordinates (what we use in code), that is:
-
-- (0,4)
-- (1,1)
-- (2,3)
-- (3,0)
-- (4,2)
-
-Below is a full `App.jsx` with:
-
-- All four original rooms unchanged in behavior.
-- Wordle still using the A=1..Z=26 sum with a user‑entered 3‑digit code segment.
-- Queens room:
-  - Uses your exact 5×5 colored layout.
-  - Requires queens in exactly those 5 squares above.
-  - Treats that pattern as the unique solution (we don’t enforce separate queen rules; we match your coordinates).
-  - Derives the Queens digit from the sum of queen columns modulo 10.
-
-Copy‑paste this over `src/App.jsx`:
-
-```jsx
 import React, { useEffect, useState } from 'react';
 
 const COLS = ['A', 'B', 'C', 'D'];
@@ -1057,4 +1026,3 @@ function App() {
 }
 
 export default App;
-```
