@@ -1,3 +1,34 @@
+Got it, thanks for clarifying.
+
+You want the correct Queens solution to be (1‑based):
+
+- (1,5)
+- (2,2)
+- (3,4)
+- (4,1)
+- (5,3)
+
+In 0‑based coordinates (what we use in code), that is:
+
+- (0,4)
+- (1,1)
+- (2,3)
+- (3,0)
+- (4,2)
+
+Below is a full `App.jsx` with:
+
+- All four original rooms unchanged in behavior.
+- Wordle still using the A=1..Z=26 sum with a user‑entered 3‑digit code segment.
+- Queens room:
+  - Uses your exact 5×5 colored layout.
+  - Requires queens in exactly those 5 squares above.
+  - Treats that pattern as the unique solution (we don’t enforce separate queen rules; we match your coordinates).
+  - Derives the Queens digit from the sum of queen columns modulo 10.
+
+Copy‑paste this over `src/App.jsx`:
+
+```jsx
 import React, { useEffect, useState } from 'react';
 
 const COLS = ['A', 'B', 'C', 'D'];
@@ -249,26 +280,37 @@ const wordleScenarios = [
   { word: 'EMAIL', digit: '3', clue: 'The communication channel the AI intercepted first.' }
 ];
 
-// Queens (Room 5) — 5x5 board matching your image
+// Queens (Room 5) — 5x5 exact layout you described
 const QUEENS_ROWS = 5;
 const QUEENS_COLS = 5;
 
-// Region layout from your image
-// G = green, P = purple, B = blue, O = orange
+// Row 1: G P P P W
+// Row 2: G P B B W
+// Row 3: G G O B B
+// Row 4: G O O O O
+// Row 5: O O O O O
 const queensRegions = [
-  ['G', 'G', 'P', 'P', 'B'],
-  ['G', 'G', 'P', 'P', 'B'],
+  ['G', 'P', 'P', 'P', 'W'],
+  ['G', 'P', 'B', 'B', 'W'],
   ['G', 'G', 'O', 'B', 'B'],
   ['G', 'O', 'O', 'O', 'O'],
   ['O', 'O', 'O', 'O', 'O']
 ];
 
-// One queen at the center cell (row 2, col 2; 0-based)
-const queensSolution = [[2, 2]];
+// Your final solution (1-based): (1,5) (2,2) (3,4) (4,1) (5,3)
+// 0-based: (0,4) (1,1) (2,3) (3,0) (4,2)
+const queensSolution = [
+  [0, 4],
+  [1, 1],
+  [2, 3],
+  [3, 0],
+  [4, 2]
+];
 
+// Derive digit from sum of columns mod 10
 function deriveQueensDigit() {
-  const [, col] = queensSolution[0];
-  return String(col);
+  const sumCols = queensSolution.reduce((acc, [, col]) => acc + col, 0);
+  return String(sumCols % 10);
 }
 
 function pick(list) {
@@ -490,8 +532,18 @@ function App() {
   const wordleDone = wordleGuesses.includes(game.wordle.word);
 
   const queensDone = (() => {
-    const [solR, solC] = queensSolution[0];
-    return queensBoard[solR][solC] === 'queen';
+    const queenPositions = [];
+    for (let r = 0; r < QUEENS_ROWS; r += 1) {
+      for (let c = 0; c < QUEENS_COLS; c += 1) {
+        if (queensBoard[r][c] === 'queen') {
+          queenPositions.push([r, c]);
+        }
+      }
+    }
+    if (queenPositions.length !== queensSolution.length) return false;
+    const key = (rc) => `${rc[0]}-${rc[1]}`;
+    const solutionSet = new Set(queensSolution.map(key));
+    return queenPositions.every((pos) => solutionSet.has(key(pos)));
   })();
 
   const completed = [pokerDone, sudokuDone, nerdleDone, wordleCodeSolved, queensDone];
@@ -951,12 +1003,13 @@ function App() {
         <RoomCard
           number="5"
           title="Queens Firewall"
-          subtitle="Place a single queen on the correct square to unlock the final character."
+          subtitle="Place queens on the correct squares of the colored board to unlock the final character."
           done={queensDone}
         >
           <div className="gamePanel">
             <p className="subtle">
-              Click a tile to cycle: blank → X → queen. Only one specific square needs a queen.
+              Click a tile to cycle: blank → X → queen. Find a non-attacking arrangement that fits
+              the regions.
             </p>
             <div className="tableScroll">
               <table className="queensTable">
@@ -1004,3 +1057,4 @@ function App() {
 }
 
 export default App;
+```
