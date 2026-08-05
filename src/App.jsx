@@ -1,3 +1,4 @@
+```jsx
 import React, { useEffect, useState } from 'react';
 
 const COLS = ['A', 'B', 'C', 'D'];
@@ -249,11 +250,10 @@ const wordleScenarios = [
   { word: 'EMAIL', digit: '3', clue: 'The communication channel the AI intercepted first.' }
 ];
 
-// Queens (Room 5)
+// Queens (Room 5) — very easy version
 const QUEENS_ROWS = 7;
 const QUEENS_COLS = 7;
 
-// Same regions, but solution will be much simpler (main diagonal)
 const queensRegions = [
   ['A', 'A', 'B', 'B', 'C', 'C', 'G'],
   ['A', 'A', 'B', 'B', 'C', 'C', 'G'],
@@ -264,20 +264,12 @@ const queensRegions = [
   ['G', 'G', 'G', 'G', 'G', 'G', 'G']
 ];
 
-// Easy solution: one queen on each main-diagonal square (0,0)...(6,6)
-const queensSolution = [
-  [0, 0],
-  [1, 1],
-  [2, 2],
-  [3, 3],
-  [4, 4],
-  [5, 5],
-  [6, 6]
-];
+// One queen at a single known square: row 3, col 3 (0-based)
+const queensSolution = [[3, 3]];
 
 function deriveQueensDigit() {
-  const sumCols = queensSolution.reduce((acc, [, col]) => acc + col, 0);
-  return String(sumCols % 10);
+  const [, col] = queensSolution[0];
+  return String(col);
 }
 
 function pick(list) {
@@ -468,6 +460,10 @@ function App() {
   const [wordleMessage, setWordleMessage] = useState('');
   const [showPokerHint, setShowPokerHint] = useState(false);
 
+  // New: user-entered 3-digit sum for Wordle code
+  const [wordleCodeInput, setWordleCodeInput] = useState('');
+  const [wordleCodeSolved, setWordleCodeSolved] = useState(false);
+
   const [queensBoard, setQueensBoard] = useState(
     () => Array.from({ length: QUEENS_ROWS }, () => Array(QUEENS_COLS).fill('blank'))
   );
@@ -493,20 +489,14 @@ function App() {
   const nerdleDone = nerdleGuesses.includes(game.nerdle.equation);
   const wordleDone = wordleGuesses.includes(game.wordle.word);
 
+  // EASY queens: exactly one queen at the solution square
   const queensDone = (() => {
-    const queenPositions = [];
-    for (let r = 0; r < QUEENS_ROWS; r += 1) {
-      for (let c = 0; c < QUEENS_COLS; c += 1) {
-        if (queensBoard[r][c] === 'queen') queenPositions.push([r, c]);
-      }
-    }
-    if (queenPositions.length !== queensSolution.length) return false;
-    const key = (rc) => `${rc[0]}-${rc[1]}`;
-    const setSolution = new Set(queensSolution.map(key));
-    return queenPositions.every((pos) => setSolution.has(key(pos)));
+    const [solR, solC] = queensSolution[0];
+    return queensBoard[solR][solC] === 'queen';
   })();
 
-  const completed = [pokerDone, sudokuDone, nerdleDone, wordleDone, queensDone];
+  // Overall completion: Wordle counts as done when the sum has been entered correctly
+  const completed = [pokerDone, sudokuDone, nerdleDone, wordleCodeSolved, queensDone];
   const solvedCount = completed.filter(Boolean).length;
   const progress = (solvedCount / 5) * 100;
 
@@ -545,6 +535,8 @@ function App() {
     setWordleGuess('');
     setWordleGuesses([]);
     setWordleMessage('');
+    setWordleCodeInput('');
+    setWordleCodeSolved(false);
     setShowPokerHint(false);
     setQueensBoard(
       Array.from({ length: QUEENS_ROWS }, () => Array(QUEENS_COLS).fill('blank'))
@@ -603,9 +595,23 @@ function App() {
     setWordleGuess('');
     setWordleMessage(
       guess === game.wordle.word
-        ? 'Word discovered. Now use the key A=1, B=2, ..., Z=26 to add up all the letters in the word and write that 3-digit total on your puzzle sheet.'
+        ? 'Word discovered. Use the A=1..Z=26 key below to compute the 3-digit sum, then enter it.'
         : 'Guess submitted. Use the colors to narrow it down.'
     );
+  }
+
+  function submitWordleSum() {
+    const cleaned = wordleCodeInput.replace(/[^0-9]/g, '').slice(0, 3);
+    if (cleaned.length !== 3) {
+      setWordleMessage('Enter a 3-digit sum (including leading zeros if needed).');
+      return;
+    }
+    if (cleaned === game.wordle.digit) {
+      setWordleCodeSolved(true);
+      setWordleMessage('Correct sum. Wordle code segment unlocked.');
+    } else {
+      setWordleMessage('That sum is not correct. Double-check the A=1..Z=26 values and try again.');
+    }
   }
 
   function tileClass(status, isWord = false) {
@@ -851,7 +857,7 @@ function App() {
           number="4"
           title="AI Word Firewall"
           subtitle="Guess the 5-letter office AI word, then convert it into a 3-digit number."
-          done={wordleDone}
+          done={wordleDone && wordleCodeSolved}
         >
           <div className="gamePanel">
             <p className="subtle">
@@ -861,8 +867,13 @@ function App() {
               className="subtle"
               style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}
             >
-              After you find the word, use this key: A=1, B=2, ..., Z=26. Add all five letter
-              values to get a 3-digit number segment for your final code sheet.
+              Letter value key:&nbsp;
+              A=1, B=2, C=3, D=4, E=5, F=6, G=7, H=8, I=9, J=10,&nbsp;
+              K=11, L=12, M=13, N=14, O=15, P=16, Q=17, R=18, S=19, T=20,&nbsp;
+              U=21, V=22, W=23, X=24, Y=25, Z=26.
+              <br />
+              After you find the word, add up the five letter values to get a 3-digit number
+              segment for your final code sheet.
             </p>
             <div className="tileRows">
               {wordleGuesses.map((guess, rowIndex) => {
@@ -906,8 +917,33 @@ function App() {
                 Submit
               </button>
             </div>
+
+            {/* Word sum input – only after the word is solved */}
+            {wordleDone && (
+              <div className="inputRow centeredRow" style={{ marginTop: '12px' }}>
+                <input
+                  value={wordleCodeInput}
+                  onChange={(e) =>
+                    setWordleCodeInput(
+                      e.target.value.replace(/[^0-9]/g, '').slice(0, 3)
+                    )
+                  }
+                  placeholder="Enter 3-digit letter sum"
+                  className="textInput"
+                  disabled={wordleCodeSolved}
+                />
+                <button
+                  className="purpleButton"
+                  disabled={wordleCodeSolved}
+                  onClick={submitWordleSum}
+                >
+                  Submit Sum
+                </button>
+              </div>
+            )}
+
             {wordleMessage && (
-              <p className={wordleDone ? 'successText' : 'subtle'}>{wordleMessage}</p>
+              <p className={wordleCodeSolved ? 'successText' : 'subtle'}>{wordleMessage}</p>
             )}
             <Legend />
           </div>
@@ -916,12 +952,12 @@ function App() {
         <RoomCard
           number="5"
           title="Queens Firewall"
-          subtitle="Place one queen in each row and column with no queens attacking each other."
+          subtitle="Place a single queen on the correct square to unlock the final character."
           done={queensDone}
         >
           <div className="gamePanel">
             <p className="subtle">
-              Click a tile to cycle: blank → X → queen. Use X to mark impossible spots. The correct pattern is simpler than it first appears.
+              Click a tile to cycle: blank → X → queen. Only one specific square needs a queen.
             </p>
             <div className="tableScroll">
               <table className="queensTable">
@@ -969,3 +1005,4 @@ function App() {
 }
 
 export default App;
+```
