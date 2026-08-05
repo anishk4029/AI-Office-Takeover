@@ -249,22 +249,22 @@ const wordleScenarios = [
   { word: 'EMAIL', digit: '3', clue: 'The communication channel the AI intercepted first.' }
 ];
 
-// Queens (Room 5) — very easy version
-const QUEENS_ROWS = 7;
-const QUEENS_COLS = 7;
+// Queens (Room 5) — 5x5 board matching your image
+const QUEENS_ROWS = 5;
+const QUEENS_COLS = 5;
 
+// Region layout from your image
+// G = green, P = purple, B = blue, O = orange
 const queensRegions = [
-  ['A', 'A', 'B', 'B', 'C', 'C', 'G'],
-  ['A', 'A', 'B', 'B', 'C', 'C', 'G'],
-  ['A', 'D', 'B', 'E', 'C', 'C', 'F'],
-  ['D', 'D', 'E', 'E', 'F', 'F', 'F'],
-  ['D', 'D', 'E', 'E', 'F', 'F', 'F'],
-  ['G', 'G', 'G', 'G', 'F', 'F', 'F'],
-  ['G', 'G', 'G', 'G', 'G', 'G', 'G']
+  ['G', 'G', 'P', 'P', 'B'],
+  ['G', 'G', 'P', 'P', 'B'],
+  ['G', 'G', 'O', 'B', 'B'],
+  ['G', 'O', 'O', 'O', 'O'],
+  ['O', 'O', 'O', 'O', 'O']
 ];
 
-// One queen at a single known square: row 3, col 3 (0-based)
-const queensSolution = [[3, 3]];
+// One queen at the center cell (row 2, col 2; 0-based)
+const queensSolution = [[2, 2]];
 
 function deriveQueensDigit() {
   const [, col] = queensSolution[0];
@@ -416,7 +416,6 @@ function Cards({ cards }) {
   );
 }
 
-// FIXED: wrap the JSX in parentheses so the parser is happy
 function RoomCard({ number, title, subtitle, done, children }) {
   return (
     <section className="room">
