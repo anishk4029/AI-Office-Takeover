@@ -266,7 +266,7 @@ const queensRegions = [
   ['O', 'O', 'O', 'O', 'O']
 ];
 
-// Your final solution (1-based): (1,5) (2,2) (3,4) (4,1) (5,3)
+// Final solution (1-based): (1,5) (2,2) (3,4) (4,1) (5,3)
 // 0-based: (0,4) (1,1) (2,3) (3,0) (4,2)
 const queensSolution = [
   [0, 4],
@@ -972,13 +972,14 @@ function App() {
         <RoomCard
           number="5"
           title="Queens Firewall"
-          subtitle="Place queens on the correct squares of the colored board to unlock the final character."
+          subtitle="Place queens so each row, each column, and each color region has exactly one queen."
           done={queensDone}
         >
           <div className="gamePanel">
             <p className="subtle">
-              Click a tile to cycle: blank → X → queen. Find a non-attacking arrangement that fits
-              the regions.
+              Click a tile to cycle: blank → X → queen. Place queens so each <b>row</b>, each{' '}
+              <b>column</b>, and each <b>color region</b> has exactly one queen, and queens cannot
+              be touching (no shared edges or corners).
             </p>
             <div className="tableScroll">
               <table className="queensTable">
